@@ -1,4 +1,4 @@
-def ft_count_harvset_recursive():
+def ft_count_harvest_recursive():
     value = int(input("Days until harvest: "))
 
     def recurs(value):
