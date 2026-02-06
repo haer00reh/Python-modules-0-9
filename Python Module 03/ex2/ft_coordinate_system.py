@@ -1,29 +1,36 @@
 import sys
 import math
 
-def parse_cords(cords: str) -> tuple:
+def parse_cords(text: str) -> tuple:
+    parts = text.split(",")
+    if len(parts) != 3:
+        raise ValueError("Coordinates must be x,y,z")
+
+    x, y, z = map(int, parts)
+    return (x, y, z)
+
+print("=== Game Coordinate System ===")
+def demo() -> None:
+    print("Demo testing...")
+    test = (10, 20, 5)
+    print(f"Position created: {test}")
+    result = math.sqrt((test[0] - 0)**2 + (test[1] - 0)**2 + (test[2] - 0)**2)
+    print(f"Distance between (0, 0, 0) and {test}: {result:.2f}")
+    print("Demo completed succesfully...\n")
+
+if  len(sys.argv) > 1:
     try:
-        s = cords.split(",")
-        n = [int(e) for e in s]
-        tp = tuple(n)
-        print(f"parsed position: {tp}")
-        print(f"Distance between (0, 0, 0) and {tp}: {calculate_distance((0, 0, 0), tp):.2f}")    
+        demo()
+        print(f"Parsing coordinates: \"{sys.argv[1]}\"")
+        coords = parse_cords(sys.argv[1])
+        print(f"Parsed position: {coords}")
+        result = math.sqrt((coords[0] - 0)**2 + (coords[1] - 0)**2 + (coords[2] - 0)**2)
+        print(f"Distance between (0, 0, 0) and {coords}: {result:.2f}")
+        print("Unpacking demonstration:\n"
+              f"Player at x={coords[0]}, y={coords[1]}, z={coords[2]}\n"
+              f"Coordinates: X={coords[0]}, Y={coords[1]}, Z={coords[2]}")
     except ValueError as error:
         print(f"Error parsing coordinates: {error}")
         print(f"Error details - Type: ValueError, Args: {error}")
-
-def calculate_distance(pos1: tuple, pos2: tuple) -> int:
-    x1, y1, z1, = pos1
-    x2, y2, z2 = pos2
-    return math.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)
-
-
-print("=== Game Coordinate System ===\n")
-sample = (10, 20, 5)
-if len(sys.argv) == 1:
-    print("no Coordinates provided, usage: python3 ft_coordinate_system.py \"x,y,z\"")
 else:
-    print(f"Position created: {sample}")
-    print(f"Distance between (0, 0, 0) and {sample}: {calculate_distance((0, 0, 0), sample):.2f}")
-    print(f"Parsing coordinates: {sys.argv[1]}")
-    parse_cords(sys.argv[1])
+    print("no arguments provided, quitting...")
