@@ -16,7 +16,7 @@ class vegetables(plant):
     def get_infos(self):
         '''prints vegetable infos'''
         print(f"{self.name} (Vegetable): {self.height}cm, "
-              + "{self.age} days, {self.harvest_season} harvest")
+              + f"{self.age} days, {self.harvest_season} harvest")
 
     def value(self):
         '''prints the vegetable nutrition value'''
@@ -37,7 +37,7 @@ class tree(plant):
     def get_infos(self):
         '''prints tree infos'''
         print(f"{self.name} (Tree): {self.height}cm, "
-              + "{self.age} days, {self.trunk_diameter}cm diameter")
+              + f"{self.age} days, {self.trunk_diameter}cm diameter")
 
 
 class flower(plant):
@@ -49,7 +49,7 @@ class flower(plant):
     def get_infos(self):
         '''prints flower infos'''
         print(f"{self.name} (flower): {self.height}cm, "
-              + "{self.age} days, {self.color} color")
+              + f"{self.age} days, {self.color} color")
 
     def bloom(self):
         '''indicates that the flower is blooming'''
