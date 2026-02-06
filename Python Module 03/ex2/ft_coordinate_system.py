@@ -26,7 +26,7 @@ if  len(sys.argv) > 1:
         print(f"Parsed position: {coords}")
         result = math.sqrt((coords[0] - 0)**2 + (coords[1] - 0)**2 + (coords[2] - 0)**2)
         print(f"Distance between (0, 0, 0) and {coords}: {result:.2f}")
-        print("Unpacking demonstration:\n"
+        print("\nUnpacking demonstration:\n"
               f"Player at x={coords[0]}, y={coords[1]}, z={coords[2]}\n"
               f"Coordinates: X={coords[0]}, Y={coords[1]}, Z={coords[2]}")
     except ValueError as error:
