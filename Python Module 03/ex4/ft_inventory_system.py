@@ -26,14 +26,14 @@ for qty in inventory.values():
     total_items += qty
 print(f"Total items in inventory: {total_items}")
 print(f"Unique item types: {len(inventory)}")
-print("=== Current Inventory ===")
+print("\n=== Current Inventory ===")
 for name, qty in inventory.items():
     percent = (qty / total_items) * 100
 
     unit_word = "unit" if qty == 1 else "units"
 
     print(f"{name}: {qty} {unit_word} ({percent:.1f}%)")
-print("=== Inventory Statistics ===")
+print("\n=== Inventory Statistics ===")
 tmp_qty = -1
 tmpn_qty = None
 for name, qty in inventory.items():
@@ -57,17 +57,17 @@ for item, qty in inventory.items():
     else:
         item_categories["Scarce"][item] = qty
 
-print("=== Item Categories ===")
+print("\n=== Item Categories ===")
 print(f"Moderate: {item_categories["Moderate"]}")
 print(f"Scarce: {item_categories["Scarce"]}")
 
-print("=== Management Suggestions ===")
+print("\n=== Management Suggestions ===")
 lst = []
 for name, qty in inventory.items():
     if tmp_qty == qty:
         lst.append(name)
 print(f"Restock needed: {lst}")
-print("=== Dictionary Properties Demo ===")
+print("\n=== Dictionary Properties Demo ===")
 keys = []
 for key in inventory.keys():
     keys.append(key)
@@ -76,3 +76,8 @@ vals = []
 for value in inventory.values():
     vals.append(value)
 print(f"Dictionary values: {vals}")
+sample = "helmet"
+if sample in inventory:
+    print(f"Sample lookup - '{sample}' in inventory: True ")
+else:
+    print(f"Sample lookup - '{sample}' in inventory: False ")
