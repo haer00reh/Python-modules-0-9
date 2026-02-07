@@ -34,3 +34,17 @@ for name, qty in inventory.items():
 
     print(f"{name}: {qty} {unit_word} ({percent:.1f}%)")
 print("=== Inventory Statistics ===")
+tmp_qty = -1
+tmpn_qty = None
+for name, qty in inventory.items():
+    if tmp_qty < qty:
+        tmp_qty = qty
+        tmpn_qty = name
+print(f"Most abundant: {tmpn_qty} ({tmp_qty})")
+tmp_qty = None
+tmpn_qty = None
+for name, qty in inventory.items():
+    if tmp_qty is None or tmp_qty > qty:
+        tmpn_qty = name
+        tmp_qty = qty
+print(f"Least abundant: {tmpn_qty} ({tmp_qty})")
