@@ -1,5 +1,5 @@
-print("=== Inventory System Analysis ===")
 import sys
+print("=== Inventory System Analysis ===")
 
 def parse_inventory_args(args):
     inventory = {}
@@ -21,4 +21,16 @@ def parse_inventory_args(args):
 
 
 inventory = parse_inventory_args(sys.argv[1:])
-print(inventory)
+total_items = 0
+for qty in inventory.values():
+    total_items += qty
+print(f"Total items in inventory: {total_items}")
+print(f"Unique item types: {len(inventory)}")
+print("=== Current Inventory ===")
+for name, qty in inventory.items():
+    percent = (qty / total_items) * 100
+
+    unit_word = "unit" if qty == 1 else "units"
+
+    print(f"{name}: {qty} {unit_word} ({percent:.1f}%)")
+print("=== Inventory Statistics ===")
