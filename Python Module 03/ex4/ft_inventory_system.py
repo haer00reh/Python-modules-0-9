@@ -48,3 +48,31 @@ for name, qty in inventory.items():
         tmpn_qty = name
         tmp_qty = qty
 print(f"Least abundant: {tmpn_qty} ({tmp_qty})")
+
+item_categories = {"Moderate": {}, "Scarce": {}}
+
+for item, qty in inventory.items():
+    if qty >= 5:
+        item_categories["Moderate"][item] = qty
+    else:
+        item_categories["Scarce"][item] = qty
+
+print("=== Item Categories ===")
+print(f"Moderate: {item_categories["Moderate"]}")
+print(f"Scarce: {item_categories["Scarce"]}")
+
+print("=== Management Suggestions ===")
+lst = []
+for name, qty in inventory.items():
+    if tmp_qty == qty:
+        lst.append(name)
+print(f"Restock needed: {lst}")
+print("=== Dictionary Properties Demo ===")
+keys = []
+for key in inventory.keys():
+    keys.append(key)
+print(f"Dictionary keys: {keys}")
+vals = []
+for value in inventory.values():
+    vals.append(value)
+print(f"Dictionary values: {vals}")
