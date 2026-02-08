@@ -1,8 +1,6 @@
 import sys
-from typing import Dict, List
 
-
-def parse_inventory_args(args: List[str]) -> Dict[str, int]:
+def parse_inventory_args(args: list[str]) -> dict[str, int]:
     inventory = {}
 
     for arg in args:
