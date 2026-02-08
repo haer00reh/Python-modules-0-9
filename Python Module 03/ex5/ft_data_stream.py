@@ -1,4 +1,5 @@
-def game_event_stream(total_events):
+
+def game_event_stream(total_events: int) -> list[tuple[int, str, int, str]]:
     for i in range(1, total_events + 1):
         level = 10 if i <= 342 else 5
 
@@ -14,17 +15,19 @@ def game_event_stream(total_events):
 
         yield i, player, level, action
 
-def fibonacci(n):
+
+def fibonacci(n: int) -> list[int]:
     a, b = 0, 1
     for _ in range(n):
         yield a
         a, b = b, a + b
 
-def primes(n):
+
+def primes(n: int) -> list[int]:
     count = 0
     num = 2
     while count < n:
-        for i in range(2, int(num**0.5)+1):
+        for i in range(2, int(num ** 0.5) + 1):
             if num % i == 0:
                 break
         else:

@@ -13,7 +13,7 @@ else:
             print(f"You typed '{scores[i]}', only decimal scores are allowed ('{scores[i]}' won't be assigned)")
             scores.pop(i)
             continue
-        i +=1
+        i += 1
     if len(scores) == 0:
         print("No scores were assigned, quitting...")
     else:
