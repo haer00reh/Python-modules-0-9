@@ -2,7 +2,8 @@ import sys
 
 print("=== Player Score Analytics ===")
 if len(sys.argv) == 1:
-    print("No scores provided. Usage: python3 ft_score_analytics.py <score1> <score2> ...")
+    print("No scores provided. Usage: python3"
+          "ft_score_analytics.py <score1> <score2> ...")
 else:
     i = 0
     scores = sys.argv[1:]
@@ -10,7 +11,8 @@ else:
         try:
             scores[i] = int(scores[i])
         except ValueError:
-            print(f"You typed '{scores[i]}', only decimal scores are allowed ('{scores[i]}' won't be assigned)")
+            print(f"You typed '{scores[i]}', only decimal"
+                  f" scores are allowed ('{scores[i]}' won't be assigned)")
             scores.pop(i)
             continue
         i += 1

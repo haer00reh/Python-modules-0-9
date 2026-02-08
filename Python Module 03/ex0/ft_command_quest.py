@@ -4,7 +4,7 @@ print("=== Command Quest ===")
 if len(sys.argv) == 1:
     print("No arguments provided!")
     print(f"Program name: {sys.argv[0]}")
-    print(f"Total arguments: 1")
+    print("Total arguments: 1")
 else:
     i = 1
     print(f"Program name: {sys.argv[0]}")

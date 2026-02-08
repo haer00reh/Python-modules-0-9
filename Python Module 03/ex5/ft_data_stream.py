@@ -35,6 +35,7 @@ def primes(n: int) -> list[int]:
             count += 1
         num += 1
 
+
 TOTAL_EVENTS = 1000
 print("=== Game Data Stream Processor ===")
 print(f"Processing {TOTAL_EVENTS} game events...")
@@ -76,7 +77,7 @@ print(f"High-level players (10+): {high_level_players}")
 print(f"Treasure events: {treasure_events}")
 print(f"Level-up events: {level_up_events}")
 print("Memory usage: Constant (streaming)")
-print(f"Processing time: 0.045 seconds")
+print("Processing time: 0.045 seconds")
 
 print("\n=== Generator Demonstration ===")
 fib_iter = iter(fibonacci(10))

@@ -86,6 +86,7 @@ print(f"Total unique achievements: {total_unique_achievements}")
 print(f"Average score: {average_score}")
 if top_performer:
     print(
-        f"Top performer: {top_performer['name']} ({top_performer['score']} points, "
+        f"Top performer: {top_performer['name']}"
+        f"({top_performer['score']} points, "
         f"{len(top_performer['achievements'])} achievements)"
     )

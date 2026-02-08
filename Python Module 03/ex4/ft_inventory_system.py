@@ -64,10 +64,7 @@ print(f"Moderate: {item_categories['Moderate']}")
 print(f"Scarce: {item_categories['Scarce']}")
 
 print("\n=== Management Suggestions ===")
-restock_list = []
-if least_qty is not None:
-    restock_list = [name for name, qty in inventory.items() if qty == least_qty]
-print(f"Restock needed: {restock_list}")
+print(f"Restock needed: {item_categories['Scarce']}")
 
 print("\n=== Dictionary Properties Demo ===")
 keys = list(inventory.keys())

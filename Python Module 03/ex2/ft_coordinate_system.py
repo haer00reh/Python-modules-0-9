@@ -15,7 +15,8 @@ def demo() -> None:
     print("Demo testing...")
     test = (10, 20, 5)
     print(f"Position created: {test}")
-    result = math.sqrt((test[0] - 0) ** 2 + (test[1] - 0) ** 2 + (test[2] - 0) ** 2)
+    result = math.sqrt((test[0] - 0) ** 2 +
+                       (test[1] - 0) ** 2 + (test[2] - 0) ** 2)
     print(f"Distance between (0, 0, 0) and {test}: {result:.2f}")
     print("Demo completed successfully...\n")
 
@@ -28,7 +29,8 @@ if len(sys.argv) > 1:
         print(f"Parsing coordinates: \"{sys.argv[1]}\"")
         coords = parse_cords(sys.argv[1])
         print(f"Parsed position: {coords}")
-        result = math.sqrt((coords[0] - 0) ** 2 + (coords[1] - 0) ** 2 + (coords[2] - 0) ** 2)
+        result = math.sqrt((coords[0] - 0) ** 2 + (coords[1] - 0)
+                           ** 2 + (coords[2] - 0) ** 2)
         print(f"Distance between (0, 0, 0) and {coords}: {result:.2f}")
         print(
             "\nUnpacking demonstration:\n"
