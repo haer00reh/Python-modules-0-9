@@ -1,5 +1,6 @@
 import sys
 
+
 def parse_inventory_args(args: list[str]) -> dict[str, int]:
     inventory = {}
 

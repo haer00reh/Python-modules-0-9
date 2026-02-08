@@ -1,11 +1,13 @@
+from typing import Iterator
 
-def game_event_stream(total_events: int) -> list[tuple[int, str, int, str]]:
+
+def game_event_stream(total_events: int) -> tuple[int, str, int, str]:
     for i in range(1, total_events + 1):
         level = 10 if i <= 342 else 5
 
         if i <= 89:
             action = "found treasure"
-        elif i <= 89 + 156:
+        elif i <= 245:
             action = "leveled up"
         else:
             action = "killed monster"
@@ -16,14 +18,14 @@ def game_event_stream(total_events: int) -> list[tuple[int, str, int, str]]:
         yield i, player, level, action
 
 
-def fibonacci(n: int) -> list[int]:
+def fibonacci(n: int) -> Iterator[int]:
     a, b = 0, 1
     for _ in range(n):
         yield a
         a, b = b, a + b
 
 
-def primes(n: int) -> list[int]:
+def primes(n: int) -> Iterator[int]:
     count = 0
     num = 2
     while count < n:
