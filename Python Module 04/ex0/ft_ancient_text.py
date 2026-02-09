@@ -6,5 +6,5 @@ try:
     print(dat.read())
     dat.close()
 except FileNotFoundError:
-    print(f"ERROR: Storage vault not found.")
+    print("ERROR: Storage vault not found.")
 print("\nData recovery complete. Storage unit disconnected.")

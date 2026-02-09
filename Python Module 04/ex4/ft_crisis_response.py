@@ -3,8 +3,8 @@ try:
     print("CRISIS ALERT: Attempting access to 'lost_archive.txt'...")
     with open("lost_archive.txt", "r") as crisis_file:
         raise FileNotFoundError("Archive not found in storage matrix")
-except FileNotFoundError as e:
-    print(f"RESPONSE: Archive not found in storage matrix")
+except FileNotFoundError:
+    print("RESPONSE: Archive not found in storage matrix")
 print("STATUS: Crisis handled, system stable")
 try:
     print("\nCRISIS ALERT: Attempting access to 'classified_vault.txt'...")

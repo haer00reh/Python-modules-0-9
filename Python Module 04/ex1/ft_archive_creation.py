@@ -16,4 +16,3 @@ try:
     print("Archive 'new_discovery.txt' ready for long-term preservation.")
 except Exception as e:
     print(f"ERROR: {e}")
-
