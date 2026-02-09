@@ -1,4 +1,5 @@
 print("=== CYBER ARCHIVES - PRESERVATION SYSTEM ===\n")
+dat = None
 try:
     print("Initializing new storage unit: new_discovery.txt")
     dat = open("new_discovery.txt", "w")
@@ -7,12 +8,18 @@ try:
               "[ENTRY 002] Efficiency increased by 347%\n"
               "[ENTRY 003] Archived by Data Archivist trainee\n")
     dat.close()
+    dat = None
     print("\nInscribing preservation data...")
+
     dat = open("new_discovery.txt", "r")
     content = dat.read()
     print(content)
+
     dat.close()
+    dat = None
     print("Data inscription complete. Storage unit sealed.")
     print("Archive 'new_discovery.txt' ready for long-term preservation.")
 except Exception as e:
     print(f"ERROR: {e}")
+    if dat is not None:
+        dat.close()
