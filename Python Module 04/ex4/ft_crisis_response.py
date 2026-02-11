@@ -2,16 +2,16 @@ print("=== CYBER ARCHIVES - CRISIS RESPONSE SYSTEM ===\n")
 try:
     print("CRISIS ALERT: Attempting access to 'lost_archive.txt'...")
     with open("lost_archive.txt", "r") as crisis_file:
-        raise FileNotFoundError("Archive not found in storage matrix")
-except FileNotFoundError:
+        pass
+except Exception:
     print("RESPONSE: Archive not found in storage matrix")
 print("STATUS: Crisis handled, system stable")
 try:
     print("\nCRISIS ALERT: Attempting access to 'classified_vault.txt'...")
     with open("classified_vault.txt", "r") as vault_file:
-        raise PermissionError("Security protocols deny access")
-except PermissionError as e:
-    print(f"RESPONSE: {e}")
+        pass
+except Exception:
+    print("RESPONSE: Security protocols deny access")
 try:
     print("\nROUTINE ACCESS: Attempting access to 'standard_archive.txt'...")
     with open("standard_archive.txt", "r") as standard_file:
