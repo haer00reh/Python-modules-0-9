@@ -6,13 +6,14 @@ try:
             print("SUCCESS: Archive located")
     except FileNotFoundError:
         print("RESPONSE: Archive not found in storage matrix")
-    print("STATUS: Crisis handled, system stable")
+        print("STATUS: Crisis handled, system stable")
     try:
         print("\nCRISIS ALERT: Attempting access to 'classified_vault.txt'...")
         with open("classified_vault.txt", "r") as vault_file:
             print("SUCCESS: vault accessed")
     except PermissionError:
         print("RESPONSE: Security protocols deny access")
+        print("STATUS: Crisis handled, security maintained")
     print("\nROUTINE ACCESS: Attempting access to 'standard_archive.txt'...")
     with open("standard_archive.txt", "r") as standard_file:
         print(f"SUCCESS: Archive recovered - `{standard_file.read()}`")
