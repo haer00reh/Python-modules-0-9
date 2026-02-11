@@ -6,7 +6,7 @@ try:
     with open("classified_data.txt", "r") as vault:
         print(vault.read())
 
-    with open("classified_data.txt", "a") as log:
+    with open("classified_data.txt", "w") as log:
         print("SECURE PRESERVATION:")
         log.write("\n[CLASSIFIED] New security protocols archived\n")
         print("[CLASSIFIED] New security protocols archived")
