@@ -17,7 +17,7 @@ class DataProcessor(ABC):
 
 class NumericProcessor(DataProcessor):
     def validate(self, data: Any) -> None:
-        if not isinstance(data, list) or not all(isinstance(x, (int, float)) for x in data):
+        if not isinstance(data, list) or not all(isinstance(x, (int)) for x in data):
             raise ValueError("NumericProcessor expects a list of numbers")
         print("Validation: Numeric data verified")
 
@@ -38,8 +38,6 @@ class TextProcessor(DataProcessor):
         word_count = len(data.split())
         return f"Processed text: {char_count} characters, {word_count} words"
 
-
-
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> None:
         if not isinstance(data, str) or ":" not in data:
@@ -48,7 +46,7 @@ class LogProcessor(DataProcessor):
 
     def process(self, data: str) -> str:
         level, message = data.split(":", 1)
-        level = level.strip().upper()
+        level = level.upper()
         message = message.strip()
 
         if level == "ERROR":
@@ -61,9 +59,9 @@ class LogProcessor(DataProcessor):
     def format_output(self, result: str) -> str:
         return f"Output: {result}"
 
-
-
 def run_processor(processor: DataProcessor, data: Any) -> None:
+    if not isinstance(processor, DataProcessor):
+        raise TypeError("ERROR: must inherite from DataProcessor")
     try:
         print(f"Processing data: {data}")
         processor.validate(data)
@@ -71,7 +69,6 @@ def run_processor(processor: DataProcessor, data: Any) -> None:
         print(processor.format_output(result))
     except ValueError as e:
         print(f"Validation Error: {e}")
-    print()
 
 
 if __name__ == "__main__":
@@ -80,13 +77,13 @@ if __name__ == "__main__":
     print("Initializing Numeric Processor...")
     run_processor(NumericProcessor(), [1, 2, 3, 4, 5])
 
-    print("Initializing Text Processor...")
+    print("\nInitializing Text Processor...")
     run_processor(TextProcessor(), "Hello Nexus World")
 
-    print("Initializing Log Processor...")
+    print("\nInitializing Log Processor...")
     run_processor(LogProcessor(), "ERROR: Connection timeout")
 
-    print("=== Polymorphic Processing Demo ===")
+    print("\n=== Polymorphic Processing Demo ===")
 
     processors = [
         NumericProcessor(),
@@ -102,3 +99,4 @@ if __name__ == "__main__":
 
     for proc, data in zip(processors, test_data):
         run_processor(proc, data)
+        print()
