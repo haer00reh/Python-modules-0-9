@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, List, Optional, Dict, Union
 
-class DataStream():
+class DataStream(ABC):
     
     @abstractmethod
     def process_batch(self, data_batch: List[Any]) -> str:
@@ -9,10 +9,12 @@ class DataStream():
     
     @abstractmethod
     def filter_data(self, data_batch: List[Any], criteria: Optional[str] = None) -> List[Any]:
+        
         pass
     
     @abstractmethod
     def get_stats(self) -> Dict[str, Union[str, int, float]]:
+        
         pass
 
 
@@ -22,7 +24,7 @@ class trans_stream(DataStream):
 class sensor_stream(DataStream):
     pass
 
-class finan_stream(DataStream):
+class event_stream(DataStream):
     pass
 
 if __name__ == "__main__":
