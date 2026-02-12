@@ -96,8 +96,8 @@ if __name__ == "__main__":
     sensor = sensor_stream("SENSOR_001", "Environmental Data")
     print(f"""\nInitializing Sensor Stream...
     Stream ID: {sensor.get_stats()['stream_id']}, Type: {sensor.get_stats()['stream_type']}
-    "Processing sensor batch: {sensor_batch}
-    "Sensor analysis: {sensor.process_batch(sensor_batch)}""")
+    Processing sensor batch: {sensor_batch}
+    Sensor analysis: {sensor.process_batch(sensor_batch)}""")
 
     transaction_batch = ["buy:100", "sell:150", "buy:75"]
     trans = trans_stream("TRANS_001", "Financial Data")
