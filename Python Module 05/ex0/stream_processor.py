@@ -15,9 +15,11 @@ class DataProcessor(ABC):
     def format_output(self, result: str) -> str:
         return f"Output: {result}"
 
+
 class NumericProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
-        if not isinstance(data, list) or not all(isinstance(x, (int)) for x in data):
+        if not isinstance(data, list) or not all(
+             isinstance(x, (int)) for x in data):
             raise ValueError("NumericProcessor expects a list of numbers")
         print("Validation: Numeric data verified")
         return True
@@ -40,10 +42,12 @@ class TextProcessor(DataProcessor):
         word_count = len(data.split())
         return f"Processed text: {char_count} characters, {word_count} words"
 
+
 class LogProcessor(DataProcessor):
     def validate(self, data: Any) -> bool:
         if not isinstance(data, str) or ":" not in data:
-            raise ValueError("LogProcessor expects a log string like 'LEVEL: message'")
+            raise ValueError("LogProcessor expects"
+                             "a log string like 'LEVEL: message'")
         print("Validation: Log entry verified")
         return True
 
@@ -61,6 +65,7 @@ class LogProcessor(DataProcessor):
 
     def format_output(self, result: str) -> str:
         return f"Output: {result}"
+
 
 def run_processor(processor: DataProcessor, data: Any) -> None:
     if not isinstance(processor, DataProcessor):

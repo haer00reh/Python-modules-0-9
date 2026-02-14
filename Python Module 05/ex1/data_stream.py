@@ -11,7 +11,8 @@ class DataStream(ABC):
     def process_batch(self, data_batch: List[Any]) -> str:
         pass
 
-    def filter_data(self, data_batch: List[Any], criteria: Optional[str] = None) -> List[Any]:
+    def filter_data(self, data_batch: List[Any],
+                    criteria: Optional[str] = None) -> List[Any]:
         try:
             if criteria is None:
                 return data_batch
@@ -44,8 +45,10 @@ class SensorStream(DataStream):
                 raise ValueError("No temperature reading found")
 
             if temp_value > 100 or temp_value < -40:
-                raise ValueError(f"Extreme temperature detected: {temp_value}°C")
-            return f"{num_readings} readings processed, avg temp: {temp_value}°C"
+                raise ValueError("Extreme temperature"
+                                 f"detected: {temp_value}°C")
+            return f"""{num_readings} readings processed,
+avg temp: {temp_value}°C"""
         except Exception as e:
             return f"[Sensor Processing Error] {e}"
 
@@ -74,7 +77,8 @@ class TransactionStream(DataStream):
                     raise ValueError(f"Unknown transaction type: {action}")
 
             net_flow = total_buys - total_sells
-            return f"{len(data_batch)} operations, net flow: {net_flow:+} units"
+            return f"""
+{len(data_batch)} operations, net flow: {net_flow:+} units"""
 
         except ValueError as ve:
             return f"[Transaction Data Error] {ve}"
@@ -95,7 +99,8 @@ class EventStream(DataStream):
                 raise TypeError("Event batch must be a list")
 
             num_events = len(data_batch)
-            num_errors = sum(1 for item in data_batch if str(item).lower() == "error")
+            num_errors = sum(1 for item in data_batch
+                             if str(item).lower() == "error")
             return f"{num_events} events, {num_errors} error detected"
 
         except Exception as e:
@@ -146,21 +151,24 @@ if __name__ == "__main__":
         sensor_batch = ["temp:22.5", "humidity:65", "pressure:1013"]
         sensor = SensorStream("SENSOR_001")
         print(f"""\nInitializing Sensor Stream...
-    Stream ID: {sensor.get_stats()['stream_id']}, Type: {sensor.get_stats()['stream_type']}
+    Stream ID: {sensor.get_stats()['stream_id']},
+    Type: {sensor.get_stats()['stream_type']}
     Processing sensor batch: {sensor_batch}
     Sensor analysis: {sensor.process_batch(sensor_batch)}""")
 
         transaction_batch = ["buy:100", "sell:150", "buy:75"]
         trans = TransactionStream("TRANS_001")
         print(f"""\nInitializing Transaction Stream...
-    Stream ID: {trans.get_stats()['stream_id']}, Type: {trans.get_stats()['stream_type']}
+    Stream ID: {trans.get_stats()['stream_id']},
+    Type: {trans.get_stats()['stream_type']}
     Processing transaction batch: {transaction_batch}
     Transaction analysis: {trans.process_batch(transaction_batch)}""")
 
         event_batch = ["login", "error", "logout"]
         event = EventStream("EVENT_001")
         print(f"""\nInitializing Event Stream...
-    Stream ID: {event.get_stats()['stream_id']}, Type: {event.get_stats()['stream_type']}
+    Stream ID: {event.get_stats()['stream_id']},
+    Type: {event.get_stats()['stream_type']}
     Processing event batch: {event_batch}
     Event analysis: {event.process_batch(event_batch)}\n""")
 
