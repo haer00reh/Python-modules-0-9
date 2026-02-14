@@ -92,7 +92,7 @@ if __name__ == "__main__":
     run_processor(LogProcessor(), "ERROR: Connection timeout")
 
     print("\n=== Polymorphic Processing Demo ===")
-
+    print("Processing multiple data types through same interface...\n")
     processors = [
         NumericProcessor(),
         TextProcessor(),
@@ -108,3 +108,4 @@ if __name__ == "__main__":
     for proc, data in zip(processors, test_data):
         run_processor(proc, data)
         print()
+print("Foundation systems online. Nexus ready for advanced streams.")
