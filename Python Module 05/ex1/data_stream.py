@@ -24,7 +24,10 @@ class DataStream(ABC):
         pass
 
 
-class Sensor_stream(DataStream):
+class SensorStream(DataStream):
+    def __init__(self, stream_id: str) -> None:
+        super().__init__(stream_id, "Environmental Data")
+
     def process_batch(self, data_batch: List[Any]) -> str:
         try:
             if not isinstance(data_batch, list):
@@ -51,6 +54,9 @@ class Sensor_stream(DataStream):
 
 
 class TransactionStream(DataStream):
+    def __init__(self, stream_id: str) -> None:
+        super().__init__(stream_id, "Financial Data")
+
     def process_batch(self, data_batch: List[Any]) -> str:
         try:
             total_buys = 0
@@ -80,6 +86,9 @@ class TransactionStream(DataStream):
 
 
 class EventStream(DataStream):
+    def __init__(self, stream_id: str) -> None:
+        super().__init__(stream_id, "System Events")
+
     def process_batch(self, data_batch: List[Any]) -> str:
         try:
             if not isinstance(data_batch, list):
@@ -100,7 +109,7 @@ class StreamProcessor:
     def __init__(self, streams: List[DataStream]):
         self.streams = streams
 
-    def process_all(self, batches: List[List[Any]]):
+    def process_all(self, batches: List[List[Any]]) -> None:
         print("=== Polymorphic Stream Processing ===")
         print("Processing mixed stream types through unified interface...\n")
 
@@ -135,25 +144,25 @@ if __name__ == "__main__":
         print("=== CODE NEXUS - POLYMORPHIC STREAM SYSTEM ===")
 
         sensor_batch = ["temp:22.5", "humidity:65", "pressure:1013"]
-        sensor = Sensor_stream("SENSOR_001", "Environmental Data")
+        sensor = SensorStream("SENSOR_001")
         print(f"""\nInitializing Sensor Stream...
     Stream ID: {sensor.get_stats()['stream_id']}, Type: {sensor.get_stats()['stream_type']}
     Processing sensor batch: {sensor_batch}
     Sensor analysis: {sensor.process_batch(sensor_batch)}""")
 
         transaction_batch = ["buy:100", "sell:150", "buy:75"]
-        trans = TransactionStream("TRANS_001", "Financial Data")
+        trans = TransactionStream("TRANS_001")
         print(f"""\nInitializing Transaction Stream...
-Stream ID: {trans.get_stats()['stream_id']}, Type: {trans.get_stats()['stream_type']}
-Processing transaction batch: {transaction_batch}
-Transaction analysis: {trans.process_batch(transaction_batch)}""")
+    Stream ID: {trans.get_stats()['stream_id']}, Type: {trans.get_stats()['stream_type']}
+    Processing transaction batch: {transaction_batch}
+    Transaction analysis: {trans.process_batch(transaction_batch)}""")
 
         event_batch = ["login", "error", "logout"]
-        event = EventStream("EVENT_001", "System Events")
+        event = EventStream("EVENT_001")
         print(f"""\nInitializing Event Stream...
-Stream ID: {event.get_stats()['stream_id']}, Type: {event.get_stats()['stream_type']}
-Processing event batch: {event_batch}
-Event analysis: {event.process_batch(event_batch)}\n""")
+    Stream ID: {event.get_stats()['stream_id']}, Type: {event.get_stats()['stream_type']}
+    Processing event batch: {event_batch}
+    Event analysis: {event.process_batch(event_batch)}\n""")
 
         processor = StreamProcessor([sensor, trans, event])
 
@@ -166,9 +175,9 @@ Event analysis: {event.process_batch(event_batch)}\n""")
         processor.process_all(mixed_batches)
 
         print("""\nStream filtering active: High-priority data only
-Filtered results: 2 critical sensor alerts, 1 large transaction
+    Filtered results: 2 critical sensor alerts, 1 large transaction
 
-All streams processed successfully. Nexus throughput optimal.""")
+    All streams processed successfully. Nexus throughput optimal.""")
 
     except Exception as e:
         print(f"[System Failure] {e}")

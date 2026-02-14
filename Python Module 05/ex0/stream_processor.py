@@ -5,7 +5,7 @@ from typing import Any, List
 class DataProcessor(ABC):
 
     @abstractmethod
-    def validate(self, data: Any) -> None:
+    def validate(self, data: Any) -> bool:
         pass
 
     @abstractmethod
@@ -16,10 +16,11 @@ class DataProcessor(ABC):
         return f"Output: {result}"
 
 class NumericProcessor(DataProcessor):
-    def validate(self, data: Any) -> None:
+    def validate(self, data: Any) -> bool:
         if not isinstance(data, list) or not all(isinstance(x, (int)) for x in data):
             raise ValueError("NumericProcessor expects a list of numbers")
         print("Validation: Numeric data verified")
+        return True
 
     def process(self, data: List[float]) -> str:
         total = sum(data)
@@ -28,10 +29,11 @@ class NumericProcessor(DataProcessor):
 
 
 class TextProcessor(DataProcessor):
-    def validate(self, data: Any) -> None:
+    def validate(self, data: Any) -> bool:
         if not isinstance(data, str):
             raise ValueError("TextProcessor expects a string")
         print("Validation: Text data verified")
+        return True
 
     def process(self, data: str) -> str:
         char_count = len(data)
@@ -39,10 +41,11 @@ class TextProcessor(DataProcessor):
         return f"Processed text: {char_count} characters, {word_count} words"
 
 class LogProcessor(DataProcessor):
-    def validate(self, data: Any) -> None:
+    def validate(self, data: Any) -> bool:
         if not isinstance(data, str) or ":" not in data:
             raise ValueError("LogProcessor expects a log string like 'LEVEL: message'")
         print("Validation: Log entry verified")
+        return True
 
     def process(self, data: str) -> str:
         level, message = data.split(":", 1)
