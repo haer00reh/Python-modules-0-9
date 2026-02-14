@@ -59,7 +59,7 @@ class CSVAdapter(ProcessingPipeline):
 class StreamAdapter(ProcessingPipeline):
     def __init__(self, pipeline_id: str) -> None:
         super().__init__()
-        self.pipeline_id: str = pipeline_id
+        self.pipeline_id: Optional[str] = pipeline_id
     
     def process(self, data: Any) -> Union[str, Any]:
         result: Any = self.execute_pipeline(data)
@@ -94,7 +94,7 @@ class NexusManager:
 
 class FailingStage:
     def process(self, data: Any) -> Any:
-        raise ValueError("Invalid data format")
+        raise ValueError(f"Invalid data format: {data}")
 
 
 class BackupStage:
@@ -181,7 +181,8 @@ if __name__ == "__main__":
     pipeline_c.add_stage(OutputStage())
     manager.register_pipeline("c", pipeline_c)
     
-    print("Pipeline A -> Pipeline B -> Pipeline C")
+    p_lines = list(manager.pipelines.keys())
+    print(f"Pipeline {p_lines[1]} -> Pipeline {p_lines[2]} -> Pipeline {p_lines[3]}")
     print("Data flow: Raw -> Processed -> Analyzed -> Stored")
     
     chain_data: Dict[str, str] = {"raw": "data"}
