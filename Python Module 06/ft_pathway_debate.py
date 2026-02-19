@@ -16,3 +16,4 @@ alchemy.transmutation.lead_to_gold(): {alchemy.transmutation.lead_to_gold()}
 alchemy.transmutation.advanced.philosophers_stone(): {
     alchemy.transmutation.advanced.philosophers_stone()}
 """)
+print("Both pathways work! Absolute: clear, Relative: concise")
