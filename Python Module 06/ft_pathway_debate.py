@@ -13,5 +13,6 @@ elixir_of_life(): {elixir_of_life()}
 
 Testing Package Access:
 alchemy.transmutation.lead_to_gold(): {alchemy.transmutation.lead_to_gold()}
-alchemy.transmutation.advanced.philosophers_stone(): {alchemy.transmutation.advanced.philosophers_stone()}
+alchemy.transmutation.advanced.philosophers_stone(): {
+    alchemy.transmutation.advanced.philosophers_stone()}
 """)
