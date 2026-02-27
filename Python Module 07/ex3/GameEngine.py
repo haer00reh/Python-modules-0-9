@@ -11,33 +11,39 @@ class GameEngine:
         self.cards_created = 0
 
     def configure_engine(self, factory: Any, strategy: Any) -> None:
-        self.factory = factory
-        self.strategy = strategy
+        try:
+            self.factory = factory
+            self.strategy = strategy
+        except Exception as e:
+            print(f"Error configuring engine: {e}")
 
     def simulate_turn(self) -> None:
-        hand = [
-            self.factory.create_creature("dragon"),
-            self.factory.create_creature("goblin"),
-            self.factory.create_spell("lightning")
-        ]
+        try:
+            hand = [
+                self.factory.create_creature("dragon"),
+                self.factory.create_creature("goblin"),
+                self.factory.create_spell("lightning")
+            ]
 
-        self.cards_created += len(hand)
+            self.cards_created += len(hand)
 
-        battlefield = {
-            "enemy_creatures": [],
-            "friendly_creatures": []
-        }
-        hand_str = [f"{card.name} ({card.cost})" for card in hand]
-        print(f"Hand: {hand_str}\n")
+            battlefield = {
+                "enemy_creatures": [],
+                "friendly_creatures": []
+            }
+            hand_str = [f"{card.name} ({card.cost})" for card in hand]
+            print(f"Hand: {hand_str}\n")
 
-        result = self.strategy.execute_turn(hand, battlefield)
+            result = self.strategy.execute_turn(hand, battlefield)
 
-        print("Turn execution:")
-        print(f"Strategy: {result['strategy']}")
-        print(f"Actions: {result['actions']}")
+            print("Turn execution:")
+            print(f"Strategy: {result['strategy']}")
+            print(f"Actions: {result['actions']}")
 
-        self.total_damage += result["actions"]["damage_dealt"]
-        self.turns_simulated += 1
+            self.total_damage += result["actions"]["damage_dealt"]
+            self.turns_simulated += 1
+        except Exception as e:
+            print(f"Error simulating turn: {e}")
 
     def get_engine_status(self) -> Dict[str, Any]:
         return {

@@ -27,43 +27,61 @@ class FantasyCardFactory(CardFactory):
     def create_creature(self,
                         name_or_power: Optional[Union[str, int]] = None
                         ) -> CreatureCard:
-        if isinstance(name_or_power, str) and name_or_power in self.creatures:
-            key = name_or_power
-        else:
-            key = random.choice(list(self.creatures.keys()))
+        try:
+            if isinstance(
+                    name_or_power, str) and name_or_power in self.creatures:
+                key = name_or_power
+            else:
+                key = random.choice(list(self.creatures.keys()))
 
-        name, cost, rarity, attack, health = self.creatures[key]
-        return CreatureCard(name, cost, rarity, attack, health)
+            name, cost, rarity, attack, health = self.creatures[key]
+            return CreatureCard(name, cost, rarity, attack, health)
+        except (KeyError, ValueError) as e:
+            print(f"Error creating creature: {e}")
+            # Return a default creature card
+            return CreatureCard("Default Creature", 1, "Common", 1, 1)
 
     def create_spell(self,
                      name_or_power: Optional[Union[str, int]] = None
                      ) -> SpellCard:
-        key = name_or_power if isinstance(name_or_power, str) else \
-            random.choice(list(self.spells.keys()))
-        name, cost, rarity, effect_type = self.spells[key]
-        return SpellCard(name, cost, rarity, effect_type)
+        try:
+            key = name_or_power if isinstance(name_or_power, str) else \
+                random.choice(list(self.spells.keys()))
+            name, cost, rarity, effect_type = self.spells[key]
+            return SpellCard(name, cost, rarity, effect_type)
+        except (KeyError, ValueError) as e:
+            print(f"Error creating spell: {e}")
+            return SpellCard("Default Spell", 1, "Common", "Damage")
 
     def create_artifact(self,
                         name_or_power: Optional[Union[str, int]] = None
                         ) -> ArtifactCard:
-        key = name_or_power if isinstance(name_or_power, str) else \
-            random.choice(list(self.artifacts.keys()))
-        name, cost, rarity, durability, effect = self.artifacts[key]
-        return ArtifactCard(name, cost, rarity, durability, effect)
+        try:
+            key = name_or_power if isinstance(name_or_power, str) else \
+                random.choice(list(self.artifacts.keys()))
+            name, cost, rarity, durability, effect = self.artifacts[key]
+            return ArtifactCard(name, cost, rarity, durability, effect)
+        except (KeyError, ValueError) as e:
+            print(f"Error creating artifact: {e}")
+            return ArtifactCard("Default Artifact", 1, "Common", 1, "None")
 
     def create_themed_deck(self, size: int) -> List[Card]:
-        deck = []
-        for _ in range(size):
-            choice = random.choice(["creature", "spell", "artifact"])
+        try:
+            deck = []
+            for _ in range(size):
+                choice = random.choice(["creature", "spell", "artifact"])
 
-            if choice == "creature":
-                deck.append(self.create_creature())
-            elif choice == "spell":
-                deck.append(self.create_spell())
-            else:
-                deck.append(self.create_artifact())
+                if choice == "creature":
+                    deck.append(self.create_creature())
+                elif choice == "spell":
+                    deck.append(self.create_spell())
+                else:
+                    deck.append(self.create_artifact())
 
-        return deck
+            return deck
+        except Exception as e:
+            print(f"Error creating themed deck: {e}")
+            return []
 
     def get_supported_types(self) -> Dict[str, List[str]]:
         return {

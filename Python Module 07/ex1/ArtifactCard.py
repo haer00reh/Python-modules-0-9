@@ -10,8 +10,12 @@ class ArtifactCard(Card):
         self.effect = effect
 
     def play(self, game_state: Dict[str, Any]) -> Dict[str, Any]:
-        return {'card_played': {game_state['name']},
-                'mana_used': 3, 'effect': self.effect}
+        try:
+            return {'card_played': {game_state['name']},
+                    'mana_used': 3, 'effect': self.effect}
+        except KeyError as e:
+            print(f"Error playing artifact: Missing key {e}")
+            return {'error': 'Invalid game state'}
 
     def get_card_info(self) -> Dict[str, Any]:
         return {'name': self.name, 'cost': self.cost,

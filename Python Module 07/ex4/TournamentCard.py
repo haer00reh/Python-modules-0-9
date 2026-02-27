@@ -20,19 +20,33 @@ class TournamentCard(Combatable, Card, Rankable):
         self.id = id
 
     def play(self, game_state: Dict[str, Any]) -> Dict[str, Any]:
-        return {'card_played': game_state['name'], 'mana_used': 3,
-                'effect': game_state['effect']}
+        try:
+            return {'card_played': game_state['name'], 'mana_used': 3,
+                    'effect': game_state['effect']}
+        except KeyError as e:
+            print(f"Error playing card: Missing key {e}")
+            return {'error': 'Invalid game state'}
 
     def calculate_rating(self) -> int:
-        return self.wins * 10 - self.losses * 5
+        try:
+            return self.wins * 10 - self.losses * 5
+        except (TypeError, AttributeError) as e:
+            print(f"Error calculating rating: {e}")
+            return 0
 
     def update_wins(self, wins: int) -> None:
-        self.wins = wins
-        self.rating += wins * 10
+        try:
+            self.wins = wins
+            self.rating += wins * 10
+        except (TypeError, AttributeError) as e:
+            print(f"Error updating wins: {e}")
 
     def update_losses(self, losses: int) -> None:
-        self.losses = losses
-        self.rating -= losses * 5
+        try:
+            self.losses = losses
+            self.rating -= losses * 5
+        except (TypeError, AttributeError) as e:
+            print(f"Error updating losses: {e}")
 
     def get_rank_info(self) -> Dict[str, Any]:
         return self.rank
@@ -42,14 +56,18 @@ class TournamentCard(Combatable, Card, Rankable):
                 'damage': self.damage, 'combat_type': self.combat_type}
 
     def defend(self, incoming_damage: int) -> Dict[str, Any]:
-        if incoming_damage < self.health + 3:
-            return {'defender': f'{self.name}',
-                    'damage_taken': incoming_damage,
-                    'damage_blocked': 3, 'still_alive': True}
-        else:
-            return {'defender': f'{self.name}',
-                    'damage_taken': incoming_damage,
-                    'damage_blocked': 3, 'still_alive': False}
+        try:
+            if incoming_damage < self.health + 3:
+                return {'defender': f'{self.name}',
+                        'damage_taken': incoming_damage,
+                        'damage_blocked': 3, 'still_alive': True}
+            else:
+                return {'defender': f'{self.name}',
+                        'damage_taken': incoming_damage,
+                        'damage_blocked': 3, 'still_alive': False}
+        except (TypeError, AttributeError) as e:
+            print(f"Error defending: {e}")
+            return {'error': str(e)}
 
     def get_combat_stats(self) -> Dict[str, int]:
         return {'attack damage': self.damage, 'defense': self.health}

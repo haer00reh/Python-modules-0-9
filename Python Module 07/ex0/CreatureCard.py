@@ -10,8 +10,13 @@ class CreatureCard(Card):
         self.attack = attack
 
     def play(self, game_state: Dict[str, Any]) -> Dict[str, Any]:
-        return {'card_played': game_state['name'],
-                'mana_used': 5, 'effect': 'Creature summoned to battlefield'}
+        try:
+            return {'card_played': game_state['name'],
+                    'mana_used': 5, 'effect':
+                    'Creature summoned to battlefield'}
+        except KeyError as e:
+            print(f"Error playing card: Missing key {e}")
+            return {'error': 'Invalid game state'}
 
     def get_card_info(self) -> Dict[str, Any]:
         return {'name': self.name, 'cost': self.cost,
@@ -24,7 +29,11 @@ class CreatureCard(Card):
                 'combat_resolved': True}
 
     def validate(self) -> bool:
-        if self.attack < 0 or self.health < 0:
+        try:
+            if self.attack < 0 or self.health < 0:
+                return False
+            else:
+                return True
+        except (AttributeError, TypeError) as e:
+            print(f"Error validating card: {e}")
             return False
-        else:
-            return True

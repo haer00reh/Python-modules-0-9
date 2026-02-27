@@ -16,7 +16,11 @@ class Card(ABC):
         pass
 
     def is_playable(self, available_mana: int) -> bool:
-        if available_mana < 5:
+        try:
+            if available_mana < 5:
+                return False
+            else:
+                return True
+        except (TypeError, ValueError) as e:
+            print(f"Error checking playability: {e}")
             return False
-        else:
-            return True
