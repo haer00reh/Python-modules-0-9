@@ -1,0 +1,18 @@
+from typing import Dict, List, Any
+from abc import ABC, abstractmethod
+
+
+class Magical(ABC):
+
+    @abstractmethod
+    def cast_spell(self, spell_name: str,
+                   targets: List[str]) -> Dict[str, Any]:
+        pass
+
+    @abstractmethod
+    def channel_mana(self, amount: int) -> Dict[str, Any]:
+        pass
+
+    @abstractmethod
+    def get_magic_stats(self) -> Dict[str, Any]:
+        pass
