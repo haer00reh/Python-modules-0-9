@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "matrix-analysis"
+version = "0.1.0"
+description = "Matrix data analysis program"
+authors = ["haer-reh"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+numpy = "*"
+pandas = "*"
+matplotlib = "*"
+requests = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
